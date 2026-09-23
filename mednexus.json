@@ -1,0 +1,183 @@
+{
+  "patients": {
+    "MN-POEDSBR": {
+      "name": "Nammu",
+      "contact": "mpnarmatha18@gmail.com",
+      "patientId": "MN-POEDSBR"
+    },
+    "MN-PVUTM6M": {
+      "name": "Nammu",
+      "contact": "Nammu",
+      "patientId": "MN-PVUTM6M"
+    }
+  },
+  "hospitals": {
+    "h1": {
+      "id": "h1",
+      "name": "Sunshine Hospital",
+      "area": "Anna Nagar",
+      "distanceKm": 1.2,
+      "specialties": [
+        "Cardiology",
+        "General"
+      ],
+      "beds": {
+        "General": {
+          "total": 40,
+          "available": 18
+        },
+        "ICU": {
+          "total": 10,
+          "available": 4
+        },
+        "Emergency": {
+          "total": 10,
+          "available": 10
+        }
+      },
+      "doctors": [
+        {
+          "id": "d_w6y54zu",
+          "name": "Dr. Kavya Iyer",
+          "role": "Cardiologist",
+          "status": "Available"
+        },
+        {
+          "id": "d_vs50pof",
+          "name": "Dr. Ramesh Nair",
+          "role": "General Physician",
+          "status": "On Duty"
+        }
+      ],
+      "staff": [
+        {
+          "id": "s_exsbsh0",
+          "name": "Nurse Priya S.",
+          "role": "ICU Nurse",
+          "shift": "Day",
+          "status": "Available"
+        },
+        {
+          "id": "s_evtj1pv",
+          "name": "Riya",
+          "role": "Staff Nurse",
+          "shift": "Day",
+          "status": "Available"
+        }
+      ],
+      "hospitalId": "h1"
+    }
+  },
+  "cases": {
+    "MN-POEDSBR": {
+      "patientId": "MN-POEDSBR",
+      "visits": [
+        {
+          "id": "visit_47f1f2a5",
+          "hospital": "Sunshine General Hospital",
+          "date": "2026-09-15",
+          "reason": "Fever and Headache",
+          "createdAt": "2026-09-21T15:51:32.672Z",
+          "updatedAt": "2026-09-21T15:51:49.966Z"
+        }
+      ],
+      "prescriptions": [],
+      "reports": []
+    }
+  },
+  "accessRequests": {
+    "access_d6acf092": {
+      "id": "access_d6acf092",
+      "patientId": "MN-POEDSBR",
+      "hospitalId": "h1",
+      "hospitalName": "City Care Hospital",
+      "status": "approved",
+      "createdAt": "2026-09-21T07:50:23.156Z",
+      "updatedAt": "2026-09-21T07:51:37.460Z"
+    },
+    "access_7781f613": {
+      "id": "access_7781f613",
+      "patientId": "MN-POEDSBR",
+      "hospitalId": "h1",
+      "hospitalName": "City Care Hospital",
+      "status": "denied",
+      "createdAt": "2026-09-21T07:51:04.020Z",
+      "updatedAt": "2026-09-21T07:51:41.719Z"
+    }
+  },
+  "ambulanceRequests": {
+    "ambulance_e8eb8c1a": {
+      "id": "ambulance_e8eb8c1a",
+      "patientName": "API Check",
+      "condition": "Normal",
+      "type": "Normal",
+      "citizen": "API",
+      "status": "Awaiting dispatch",
+      "createdAt": "2026-09-21T09:18:11.232Z"
+    },
+    "ambulance_3c3ef48f": {
+      "id": "ambulance_3c3ef48f",
+      "patientName": "nammu",
+      "condition": "Normal",
+      "type": "Ventilator-support",
+      "citizen": "Nammu",
+      "patientId": "MN-POEDSBR",
+      "status": "Awaiting dispatch",
+      "createdAt": "2026-09-21T15:52:50.788Z"
+    }
+  },
+  "chats": {
+    "MN-API-CHECK": [
+      {
+        "id": "msg_13bbfcdf",
+        "who": "user",
+        "text": "hello",
+        "createdAt": "2026-09-21T09:18:11.422Z"
+      }
+    ],
+    "MN-POEDSBR": [
+      {
+        "id": "msg_180ab789",
+        "who": "bot",
+        "text": "Hi, I'm the Care Assistant Bot. Tell me your symptom and how long it's lasted — I'll give safe, general self-care guidance. I never suggest medicines or dosages.",
+        "createdAt": "2026-09-21T15:53:41.964Z"
+      },
+      {
+        "id": "msg_048de047",
+        "who": "user",
+        "text": "I have a fever",
+        "createdAt": "2026-09-21T15:53:49.501Z"
+      },
+      {
+        "id": "msg_f9cc898a",
+        "who": "bot",
+        "text": "For a mild fever: rest, fluids, and a light diet, and keep the room cool. If it crosses 3 days or feels very high, please visit a hospital — I can't advise on medicines.",
+        "createdAt": "2026-09-21T15:53:49.809Z"
+      },
+      {
+        "id": "msg_f6ac09ce",
+        "who": "user",
+        "text": "ok",
+        "createdAt": "2026-09-21T15:54:04.733Z"
+      },
+      {
+        "id": "msg_72aea27b",
+        "who": "bot",
+        "text": "Thanks for sharing that. Let me know how many days it's been so I can advise better — and if anything feels serious, please use Ambulance Booking instead of waiting.",
+        "createdAt": "2026-09-21T15:54:05.041Z"
+      },
+      {
+        "id": "msg_1f94e233",
+        "who": "user",
+        "text": "It's about 3 days",
+        "createdAt": "2026-09-21T15:54:25.308Z"
+      },
+      {
+        "id": "msg_8784e986",
+        "who": "bot",
+        "text": "Since it's crossed 3 days, please visit a doctor. Based on your location, the nearest hospital is City Care, 1.2 km away 📍",
+        "createdAt": "2026-09-21T15:54:25.639Z"
+      }
+    ]
+  }
+}

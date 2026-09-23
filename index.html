@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MedNexus &mdash; Smart Med-Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="app-nav">
+  <div class="brand" onclick="go('home')">
+    <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
+      <circle cx="16" cy="16" r="15" stroke="#16324F" stroke-width="1.6"/>
+      <path d="M6 17 L11 17 L13 12 L16 21 L18.5 15 L20 17 L26 17" stroke="#E8862E" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span class="brand-name">MedNexus<small>SMART MED-PLATFORM</small></span>
+  </div>
+  <div class="nav-right" id="navRight"></div>
+</nav>
+
+<!-- ============================================================= HOME ============================================================= -->
+<section class="view active" id="view-home">
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="hero-eyebrow">Citizen &amp; Admin, one shared platform</div>
+        <h1>One request, synced everywhere, instantly.</h1>
+        <p class="lede">MedNexus connects hospital admins and citizens through a single database &mdash; live beds, smart ambulance matching by condition, and a safe, non-prescriptive AI assistant, all in sync.</p>
+        <div class="hero-actions">
+          <button class="btn btn-amber" onclick="go('citizenAuth')">I'm a citizen</button>
+          <button class="btn btn-ghost" onclick="go('adminAuth')">I'm a hospital admin</button>
+        </div>
+      </div>
+      <div class="arch-card">
+        <h3>How a request moves</h3>
+        <div class="arch-flow">
+          <div class="arch-node">Citizen Portal — search, book, request, chat</div>
+          <div class="arch-arrow">↓</div>
+          <div class="arch-node">Central Database &amp; APIs — one shared source of truth</div>
+          <div class="arch-arrow">↓</div>
+          <div class="arch-node">Admin Portal — beds, staff, dispatch, analytics</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="portal-choice">
+    <div class="wrap">
+      <h2>Two portals, one database</h2>
+      <p>Nothing here is looking at stale data — whatever a citizen requests, the admin sees instantly, and whatever an admin updates, the citizen sees instantly.</p>
+      <div class="portal-grid">
+        <div class="portal-card citizen">
+          <span class="tag">CITIZEN PORTAL</span>
+          <h3>Search, book, request, and get guidance</h3>
+          <ul>
+            <li>Search hospitals by specialty, distance and live availability</li>
+            <li>Book, confirm and track appointments in one flow</li>
+            <li>One-tap emergency call, or a quick request form matched to Normal or Ventilator-support ambulance</li>
+            <li>Care Assistant Bot for safe, non-prescriptive self-care guidance</li>
+          </ul>
+          <button class="btn btn-amber" onclick="go('citizenAuth')" style="margin-top:6px;">Enter citizen portal</button>
+        </div>
+        <div class="portal-card admin">
+          <span class="tag">ADMIN PORTAL</span>
+          <h3>Manage capacity, staff, and requests</h3>
+          <ul>
+            <li>Live bed tracking &mdash; vacant, occupied, ICU &mdash; by department</li>
+            <li>On-duty / off-duty staff status and shift scheduling</li>
+            <li>Accept, reschedule or reject appointments from one queue</li>
+            <li>Reports &amp; analytics &mdash; inflow trends and emergency alerts</li>
+          </ul>
+          <button class="btn btn-ghost" onclick="go('adminAuth')" style="margin-top:6px;">Enter admin portal</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flow-strip">
+    <div class="wrap">
+      <h2>Ambulance request, end to end</h2>
+      <p class="sub">A real request as it moves through the platform, citizen to admin.</p>
+      <div class="flow-steps">
+        <div class="flow-step"><span class="n">1</span><h4>Citizen requests</h4><p>One-tap request captures patient condition &amp; symptoms from the Citizen Portal.</p></div>
+        <div class="flow-step"><span class="n">2</span><h4>Smart matching</h4><p>Central logic matches condition to a Normal or Ventilator-support ambulance.</p></div>
+        <div class="flow-step"><span class="n">3</span><h4>Synced instantly</h4><p>Request &amp; match are saved to the shared database and pushed live to admins.</p></div>
+        <div class="flow-step"><span class="n">4</span><h4>Dispatch &amp; track</h4><p>Admin confirms dispatch from the Admin Portal; citizen tracks status in real time.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">MedNexus &mdash; Smart Med-Platform, a project demonstration. Not a substitute for professional medical advice.</footer>
+</section>
+
+<!-- ============================================================= CITIZEN AUTH ============================================================= -->
+<section class="view" id="view-citizenAuth">
+  <div class="auth-shell">
+    <div class="wrap-narrow">
+      <div class="auth-card">
+        <div class="auth-toggle-row">
+          <button id="cAuthTabLogin" class="on" onclick="setCitizenAuthMode('login')">Sign in</button>
+          <button id="cAuthTabSignup" onclick="setCitizenAuthMode('signup')">Sign up</button>
+        </div>
+        <h2 id="cAuthTitle">Welcome back</h2>
+        <div class="sub" id="cAuthSub">Sign in to search hospitals and manage your requests.</div>
+        <form id="citizenAuthForm" onsubmit="submitCitizenAuth(event)">
+          <div class="field" id="cNameField" style="display:none;">
+            <label>Full name</label>
+            <input type="text" id="cName" placeholder="Divya Prakash" />
+          </div>
+          <div class="field">
+            <label>Phone or email</label>
+            <input type="text" id="cContact" placeholder="divya@example.com" required />
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input type="password" id="cPass" placeholder="••••••••" required />
+          </div>
+          <button class="btn btn-amber btn-block" type="submit" id="cAuthSubmit">Sign in</button>
+        </form>
+        <div class="jwt-note">Secured with role-based authentication &middot; Citizen role</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= ADMIN AUTH ============================================================= -->
+<section class="view" id="view-adminAuth">
+  <div class="auth-shell">
+    <div class="wrap-narrow">
+      <div class="auth-card">
+        <div class="auth-toggle-row">
+          <button id="aAuthTabLogin" class="on" onclick="setAdminAuthMode('login')">Sign in</button>
+          <button id="aAuthTabSignup" onclick="setAdminAuthMode('signup')">Register hospital</button>
+        </div>
+        <h2 id="aAuthTitle">Admin sign in</h2>
+        <div class="sub" id="aAuthSub">Only verified hospital admins can manage beds, staff and appointments.</div>
+        <form id="adminAuthForm" onsubmit="submitAdminAuth(event)">
+          <div class="field" id="aNameField" style="display:none;">
+            <label>Hospital name</label>
+            <input type="text" id="aName" placeholder="City Care Hospital" />
+          </div>
+          <div class="field" id="aRegField" style="display:none;">
+            <label>Registration / license number</label>
+            <input type="text" id="aReg" placeholder="e.g. TN/HOSP/2019/00452" />
+          </div>
+          <div class="field">
+            <label>Admin email</label>
+            <input type="text" id="aContact" placeholder="admin@hospital.org" required />
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input type="password" id="aPass" placeholder="••••••••" required />
+          </div>
+          <button class="btn btn-primary btn-block" type="submit" id="aAuthSubmit">Sign in</button>
+        </form>
+        <div class="jwt-note">Secured with role-based authentication &middot; Admin role</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= CITIZEN DASHBOARD ============================================================= -->
+<section class="view" id="view-citizenDash">
+  <div class="wrap dash-header">
+    <h2 id="citizenGreeting">Hello</h2>
+    <p style="opacity:.65;margin-top:6px;">Search by specialty, distance or availability, and book straight from the list.</p>
+    <div class="dash-tabs">
+      <button class="dash-tab on" data-ctab="search" onclick="setCitizenTab('search')">Search hospitals</button>
+      <button class="dash-tab" data-ctab="appts" onclick="setCitizenTab('appts')">My appointments</button>
+      <button class="dash-tab" data-ctab="cases" onclick="setCitizenTab('cases')">Case tracker</button>
+      <button class="dash-tab" data-ctab="profile" onclick="setCitizenTab('profile')">My profile</button>
+    </div>
+  </div>
+  <div class="wrap dash-body">
+    <div id="cTab-search">
+      <div class="search-row">
+        <input type="text" id="hospitalSearchInput" placeholder="Search hospitals near you…" onkeydown="if(event.key==='Enter'){runSearch(this.value)}" />
+        <button class="btn btn-primary" onclick="runSearch(document.getElementById('hospitalSearchInput').value)">Search</button>
+      </div>
+      <div class="filter-row" id="specialtyFilters"></div>
+      <div class="hosp-list" id="hospitalList"></div>
+    </div>
+    <div id="cTab-appts" style="display:none;">
+      <div class="appt-list" id="myApptList"></div>
+    </div>
+    <div id="cTab-cases" style="display:none;"></div>
+    <div id="cTab-profile" style="display:none;"></div>
+  </div>
+</section>
+
+<!-- ============================================================= HOSPITAL DETAIL ============================================================= -->
+<section class="view" id="view-hospitalDetail">
+  <div class="wrap dash-body" style="padding-top:32px;">
+    <button class="btn btn-ghost btn-sm detail-back" onclick="go('citizenDash')">&larr; Back to search</button>
+    <div id="hospitalDetailContent"></div>
+  </div>
+</section>
+
+<!-- ============================================================= AMBULANCE ============================================================= -->
+<section class="view" id="view-ambulance">
+  <div class="wrap dash-body" style="padding-top:32px;">
+    <button class="btn btn-ghost btn-sm detail-back" onclick="go('citizenDash')">&larr; Back to search</button>
+    <div class="ambu-hero">
+      <div>
+        <h2>Ambulance Booking</h2>
+        <p>One-tap emergency call, or a quick request form matched to the right ambulance type.</p>
+      </div>
+      <button class="btn btn-amber" onclick="directAmbulanceCall()">One-tap emergency call</button>
+    </div>
+    <div class="ambu-grid">
+      <div class="detail-panel">
+        <h4 style="font-size:1.05rem;margin-bottom:14px;">Quick request form</h4>
+        <div class="field">
+          <label>Patient name</label>
+          <input type="text" id="ambuName" placeholder="Patient's full name" />
+        </div>
+        <label style="display:block;font-size:.8rem;font-weight:600;margin-bottom:6px;color:var(--ink-blue-deep);">Condition</label>
+        <div class="cond-toggle">
+          <button type="button" class="cond-btn" id="condNormalBtn" onclick="setCondition('Normal')">Normal</button>
+          <button type="button" class="cond-btn" id="condSeriousBtn" onclick="setCondition('Serious')">Serious</button>
+        </div>
+        <div class="field">
+          <label>Symptoms</label>
+          <textarea id="ambuSymptoms" rows="4" placeholder="e.g. conscious but severe chest pain, struggling to breathe"></textarea>
+        </div>
+        <button class="btn btn-primary btn-block" onclick="runAmbulancePrediction()">Get smart ambulance match</button>
+      </div>
+      <div class="result-panel" id="ambuResultPanel">
+        <p style="opacity:.55;font-size:.86rem;">Fill the quick request form, then run the match.</p>
+        <div class="mini-flow">
+          <div><b>1.</b> Citizen requests</div>
+          <div><b>2.</b> Smart matching</div>
+          <div><b>3.</b> Synced instantly to admin</div>
+          <div><b>4.</b> Dispatch &amp; track</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= CARE ASSISTANT BOT ============================================================= -->
+<section class="view" id="view-bot">
+  <div class="wrap bot-shell">
+    <div class="bot-side">
+      <button class="btn btn-ghost btn-sm" onclick="go('citizenDash')" style="margin-bottom:18px;">&larr; Back to search</button>
+      <h4>Care Assistant Bot</h4>
+      <p>Symptom-based guidance only. Tell it how long a symptom has lasted &mdash; past 3 days, it will point you to the nearest hospital.</p>
+      <div class="disclaim">Never suggests medicines or dosages &mdash; safe by design, not a doctor.</div>
+      <div class="gps-note">Uses your location to suggest the nearest hospital if symptoms persist.</div>
+    </div>
+    <div class="chat-window">
+      <div class="chat-log" id="chatLog"></div>
+      <div class="chat-input-row">
+        <button class="mic-btn" id="micBtn" onclick="toggleMic()" title="Voice input">🎤</button>
+        <input type="text" id="chatInput" placeholder="e.g. I have a cold since yesterday" onkeydown="if(event.key==='Enter'){sendChat()}" />
+        <button class="send-btn" onclick="sendChat()" title="Send">➤</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= ADMIN DASHBOARD ============================================================= -->
+<section class="view" id="view-adminDash">
+  <div class="hosp-topbar">
+    <div class="wrap">
+      <div>
+        <h2 id="adminDashName">Hospital</h2>
+        <div class="sub">Verified hospital administrator console</div>
+      </div>
+      <span class="role-chip" style="background:rgba(255,255,255,.15);color:#fff;">Role: Admin</span>
+    </div>
+  </div>
+  <div class="hdash-tabs wrap" style="max-width:1180px;margin:0 auto;padding-left:32px;padding-right:32px;">
+    <button class="hdash-tab on" data-atab="beds" onclick="setAdminTab('beds')">Bed availability</button>
+    <button class="hdash-tab" data-atab="staff" onclick="setAdminTab('staff')">Staff</button>
+    <button class="hdash-tab" data-atab="appts" onclick="setAdminTab('appts')">Appointments</button>
+    <button class="hdash-tab" data-atab="ambulance" onclick="setAdminTab('ambulance')">Ambulance requests</button>
+    <button class="hdash-tab" data-atab="cases" onclick="setAdminTab('cases')">Patient case tracker</button>
+    <button class="hdash-tab" data-atab="profile" onclick="setAdminTab('profile')">Hospital profile</button>
+    <button class="hdash-tab" data-atab="reports" onclick="setAdminTab('reports')">Reports &amp; analytics</button>
+  </div>
+  <div class="wrap hdash-body">
+    <div id="aTab-beds"></div>
+    <div id="aTab-staff" style="display:none;"></div>
+    <div id="aTab-appts" style="display:none;"></div>
+    <div id="aTab-ambulance" style="display:none;"></div>
+    <div id="aTab-cases" style="display:none;"></div>
+    <div id="aTab-profile" style="display:none;"></div>
+    <div id="aTab-reports" style="display:none;"></div>
+  </div>
+</section>
+
+<div id="toast-stack"></div>
+
+<div class="modal-backdrop" id="apptModalBackdrop">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeApptModal()">&times;</button>
+    <h3>Book an appointment</h3>
+    <div class="sub" id="apptModalSub"></div>
+    <form id="apptForm" onsubmit="submitAppointment(event)">
+      <div class="field">
+        <label>Department</label>
+        <select id="apptDept"></select>
+      </div>
+      <div class="field">
+        <label>Doctor</label>
+        <select id="apptDoctor"></select>
+      </div>
+      <div class="field">
+        <label>Preferred date</label>
+        <input type="date" id="apptDate" required />
+      </div>
+      <div class="field">
+        <label>Time slot</label>
+        <select id="apptTime"></select>
+      </div>
+      <div class="field">
+        <label>Reason for visit</label>
+        <textarea id="apptReason" rows="3" placeholder="Brief note for the hospital"></textarea>
+      </div>
+      <button class="btn btn-amber btn-block" type="submit">Request appointment</button>
+    </form>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
